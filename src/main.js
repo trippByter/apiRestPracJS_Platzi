@@ -22,6 +22,10 @@ async function getTrendingMoviesPreview() {
     
     // Obtain the movie image from the API
     // and construct a HTML element.
+    // 1th Get <article class="trendingPreview-movieList">
+    // --- Work in duplicate error--- //
+    // -- put out the function to categoriesPreviewList---//
+    trendingMoviesPreviewList.innerHTML = "";
     movies.forEach(movie => {
         // CREATE  <div/>  INSIDE  <article/>
         // <article class="trendingPreview-movieList">
@@ -30,8 +34,6 @@ async function getTrendingMoviesPreview() {
         //    </div>
         // </article>
         
-        // 1th Get <article class="trendingPreview-movieList">
-        const trendingMoviesPreviewList = document.querySelector("#trendingPreview .trendingPreview-movieList");
         
         // 2nd Create <div class="movie-container">
         const movieContainer = document.createElement("div");
@@ -62,6 +64,10 @@ async function getCategoriesPreview() {
     
     // Obtain the movie image from the API
     // and construct a HTML element.
+    // --- Work in duplicate error--- //
+    // -- put out the function to categoriesPreviewList---//
+    // 1th Get <article class="categoriesPreview-list">
+    categoriesPreviewList.innerHTML = "";
     categories.forEach(category => {
         // CREATE  <div/>  INSIDE  <categoriesPreview-list/>
         // <article class="categoriesPreview-list">
@@ -70,8 +76,6 @@ async function getCategoriesPreview() {
         //   </div>
         // </article>
         
-        // 1th Get <article class="categoriesPreview-list">
-        const categoriesPreviewList = document.querySelector("#categoriesPreview .categoriesPreview-list");
         
         // 2nd Create <div class="category-container">
         const categoryContainer = document.createElement("div");

@@ -11,7 +11,8 @@ trendingBtn.addEventListener("click", () => {
 });
 
 arrowBtn.addEventListener("click", () => {
-    location.hash = "#home";
+    // location.hash = "#home";
+    history.back();
 });
 
 // Llamamos a navigator cuando cargue la aplicación
@@ -138,4 +139,7 @@ function trendsPage(){
     categoriesPreviewSection.classList.add("inactive")
     genericSection.classList.remove("inactive");
     movieDetailSection.classList.add("inactive");
+
+    headerCategoryTitle.innerHTML = "Trendings";
+    getTrendingMovies();
 };

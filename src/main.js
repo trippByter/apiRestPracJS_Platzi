@@ -103,3 +103,13 @@ async function getMoviesBySearch(query) {
     // genericSection - lugar a insertar el movies
     createMovies(movies, genericSection);  
 };
+
+
+async function getTrendingMovies() {
+    // Obtain the API directly from aixos and get the movies(results)
+    const {data} = await api("trending/movie/day");
+    const movies = data.results;
+    // console.log(data);
+    
+    createMovies(movies, genericSection);
+};

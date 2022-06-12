@@ -35,6 +35,11 @@ function navigator(){
     }else{
         homePage();
     }
+    // Corrigiendo problemas de scroll.
+    // Se usan ambas por temas de conflicto
+    // entre navegadores.
+    document.bodyscrollTop = 0;
+    document.documentElement.scrollTop = 0;
 };
 
 function homePage(){

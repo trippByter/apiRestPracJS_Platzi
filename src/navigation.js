@@ -69,6 +69,13 @@ function categoriesPage(){
     categoriesPreviewSection.classList.add("inactive")
     genericSection.classList.remove("inactive");
     movieDetailSection.classList.add("inactive");
+    // localhost:5500/?#category=35_Comedy - obtenemos el id (35)
+    // [_, caetgoryData] - primer elemento es obviado
+    const [_, categoryData] =  location.hash.split("="); // ["category", "id-name"]
+    const [categoryId, categoryName] = categoryData.split("_");
+
+    headerCategoryTitle.innerHTML = categoryName;
+    getMoviesByCategory(categoryId);
 };
 
 function movieDetailsPage(){

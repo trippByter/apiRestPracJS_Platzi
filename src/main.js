@@ -85,6 +85,11 @@ async function getCategoriesPreview() {
         const categoryTitle = document.createElement("h3");
         categoryTitle.classList.add("category-title");
         categoryTitle.setAttribute("id", "id" + category.id);
+        // Habilitamos llamadas a la API desde los clicks
+        // en las "Categorías" en el home page.
+        categoryTitle.addEventListener("click", () => {
+            location.hash = `#category=${category.id}_${category.name}`;
+        })
         const categoryTitleText = document.createTextNode(category.name);
 
         // 4th Add <h3 id="id+category.id" class="category-title">
@@ -94,7 +99,46 @@ async function getCategoriesPreview() {
         categoriesPreviewList.appendChild(categoryContainer);
     });
 };
-// getCategoriesPreview();
-/*
-<class="" id="Adventure">Adventure</class=>
-*/
+
+
+async function getMoviesByCategory(id) {
+    const {data} = await api("discover/movie", {
+        // El id es pasado como query parameter
+        params: {
+            with_genres: id,
+        }
+    });
+    const movies = data.results;
+    // console.log(data);
+    
+    // Obtain the movie image from the API
+    // and construct a HTML element.
+    // 1th Get <article class="trendingPreview-movieList">
+    // --- Work in duplicate error--- //
+    // -- put out the function to categoriesPreviewList---//
+    genericSection.innerHTML = "";
+    movies.forEach(movie => {
+        // CREATE  <div/>  INSIDE  <article/>
+        // <article class="trendingPreview-movieList">
+        //   <div class="movie-container">
+        //     <img class="movie-container" alt="..." src="..." >
+        //    </div>
+        // </article>
+        
+        
+        // 2nd Create <div class="movie-container">
+        const movieContainer = document.createElement("div");
+        movieContainer.classList.add("movie-container");
+        
+        // 3rd Create <img class="movie-container" alt="..." src="..." > 
+        const movieImg = document.createElement("img");
+        movieImg.classList.add("movie-img");
+        movieImg.setAttribute("alt", movie.title);
+        movieImg.setAttribute("src", "https://image.tmdb.org/t/p/w300" + movie.poster_path);
+        
+        // 4th Add <img class="movie-container" alt="..." src="..." >
+        // To <div class="movie-container">
+        movieContainer.appendChild(movieImg);
+        genericSection.appendChild(movieContainer);
+    });
+};

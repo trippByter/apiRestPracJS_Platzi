@@ -1,6 +1,8 @@
 // Llamamos al botón del form de busqueda
+// Manipulamos el click del buscador de peliculas
+// Luego que le agregue al hash el valor del input
 searchFormBtn.addEventListener("click", () => {
-    location.hash = "#search="; // test
+    location.hash = "#search=" + searchFormInput.value; // test
 });
 
 // Llamamos al botón "ver más" del home page
@@ -18,6 +20,7 @@ window.addEventListener("DOMContentLoaded", navigator, false);
 // "false" es para no usar la fase de captura
 // sino solo usar la fase "bubbling" - burbuja
 window.addEventListener("hashchange", navigator, false);
+
 // Esta aplicacion se llama cada vez que cargue 
 // la aplicación y cada vez que cambie el hash
 function navigator(){
@@ -38,7 +41,7 @@ function navigator(){
     // Corrigiendo problemas de scroll.
     // Se usan ambas por temas de conflicto
     // entre navegadores.
-    document.bodyscrollTop = 0;
+    document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 };
 
@@ -47,7 +50,8 @@ function homePage(){
     headerSection.classList.remove("header-container--long");
     headerSection.style.background = "";
     arrowBtn.classList.add("inactive");
-    arrowBtn.classList.remove("header-arrow--white");    headerTitle.classList.add("inactive");
+    arrowBtn.classList.remove("header-arrow--white");    
+    headerTitle.classList.remove("inactive");
     headerCategoryTitle.classList.add("inactive");
     searchForm.classList.remove("inactive");
 
@@ -106,13 +110,18 @@ function searchPage(){
     arrowBtn.classList.remove("inactive");
     arrowBtn.classList.remove("header-arrow--white");
     headerTitle.classList.add("inactive");
-    headerCategoryTitle.classList.remove("inactive");
+    headerCategoryTitle.classList.add("inactive");
     searchForm.classList.remove("inactive");
 
     trendingPreviewSection.classList.add("inactive");
     categoriesPreviewSection.classList.add("inactive")
     genericSection.classList.remove("inactive");
     movieDetailSection.classList.add("inactive");
+    // Obtenemos string del cuadro de búsqueda
+    // [_, searchInput.value]
+    const [_, query] =  location.hash.split("="); // ["category", "id-name"]
+    // Lo pasamos como parámetro a getMoviesBySearch
+    getMoviesBySearch(query);
 };
 
 function trendsPage(){

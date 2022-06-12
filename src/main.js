@@ -31,7 +31,7 @@ async function getTrendingMoviesPreview() {
         // </article>
         
         // 1th Get <article class="trendingPreview-movieList">
-        const trendingPreviewContainer = document.querySelector("#trendingPreview .trendingPreview-movieList");
+        const trendingMoviesPreviewList = document.querySelector("#trendingPreview .trendingPreview-movieList");
         
         // 2nd Create <div class="movie-container">
         const movieContainer = document.createElement("div");
@@ -46,7 +46,7 @@ async function getTrendingMoviesPreview() {
         // 4th Add <img class="movie-container" alt="..." src="..." >
         // To <div class="movie-container">
         movieContainer.appendChild(movieImg);
-        trendingPreviewContainer.appendChild(movieContainer);
+        trendingMoviesPreviewList.appendChild(movieContainer);
     });
 };
 // getTrendingMoviesPreview();
@@ -71,7 +71,7 @@ async function getCategoriesPreview() {
         // </article>
         
         // 1th Get <article class="categoriesPreview-list">
-        const previewCategoriesContainer = document.querySelector("#categoriesPreview .categoriesPreview-list");
+        const categoriesPreviewList = document.querySelector("#categoriesPreview .categoriesPreview-list");
         
         // 2nd Create <div class="category-container">
         const categoryContainer = document.createElement("div");
@@ -87,7 +87,7 @@ async function getCategoriesPreview() {
         // To <div class="category-container">
         categoryTitle.appendChild(categoryTitleText);
         categoryContainer.appendChild(categoryTitle);
-        previewCategoriesContainer.appendChild(categoryContainer);
+        categoriesPreviewList.appendChild(categoryContainer);
     });
 };
 // getCategoriesPreview();

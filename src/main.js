@@ -7,15 +7,18 @@ const api = axios.create({
     // agregamos aqui los parámetros
     params:{
         "api_key": API_KEY,
-    }
+        // Trabajamos con el hash para la 
+        // interacción con el usuario
+    },
 });
 
 // Working with API
+// Movie's trending
 async function getTrendingMoviesPreview() {
     // Obtain the API directly from aixos and get the movies(results)
     const {data} = await api("trending/movie/day");
     const movies = data.results;
-    console.log(data);
+    // console.log(data);
     
     // Obtain the movie image from the API
     // and construct a HTML element.
@@ -46,7 +49,7 @@ async function getTrendingMoviesPreview() {
         trendingPreviewContainer.appendChild(movieContainer);
     });
 };
-getTrendingMoviesPreview();
+// getTrendingMoviesPreview();
 
 
 // Movie's categories
@@ -55,7 +58,7 @@ async function getCategoriesPreview() {
     // const data = await res.json(); // Axios ya devuelve json
     // Review the resonse in the API docs
     const categories = data.genres;
-    console.log(data);
+    // console.log(data);
     
     // Obtain the movie image from the API
     // and construct a HTML element.
@@ -87,7 +90,7 @@ async function getCategoriesPreview() {
         previewCategoriesContainer.appendChild(categoryContainer);
     });
 };
-getCategoriesPreview();
+// getCategoriesPreview();
 /*
 <class="" id="Adventure">Adventure</class=>
 */

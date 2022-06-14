@@ -1,7 +1,7 @@
 const api = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
     headers: {
-        "content-type": "application/json;charset=utf-8",
+        "Content-type": "application/json;charset=utf-8",
     },
     // En vez de usar query parameters
     // agregamos aqui los parámetros
@@ -11,7 +11,9 @@ const api = axios.create({
         // interacción con el usuario
     },
 });
-
+// Agregando detalle a cada imagen que recibimos
+// de la api. Con click event cambiamos el
+// "location.hash" hacia la ruta indicada.
 // Utils - código reutilizable
 function createMovies(movies, container){
     // Limpiamos los containers antes 
@@ -20,7 +22,9 @@ function createMovies(movies, container){
     movies.forEach(movie => {
         const movieContainer = document.createElement("div");
         movieContainer.classList.add("movie-container");
-        
+        movieContainer.addEventListener("click", () => {
+            location.hash = "#movie=" + movie.id;
+        });
         const movieImg = document.createElement("img");
         movieImg.classList.add("movie-img");
         movieImg.setAttribute("alt", movie.title);
@@ -112,4 +116,30 @@ async function getTrendingMovies() {
     // console.log(data);
     
     createMovies(movies, genericSection);
+};
+
+async function getMovieById(movieId) {
+    // Obtain the API directly from aixos and get the movies(results)
+    // Renombramos el "data" a "movie".
+    const {data: movie} = await api("/movie/" + movieId);
+    
+    // Obtenemos la imagen de la película.
+    // 
+    const movieImgUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+    headerSection.style.background = `
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.35) 19.27%,
+            rgba(0, 0, 0, 0) 29.17%
+        ),
+        url(${movieImgUrl})
+    `;
+
+    // Traemos la información de la película
+    movieDetailTitle.textContent = movie.title; // Título
+    movieDetailDescription.textContent = movie.overview; // Descripción
+    movieDetailScore.textContent = movie.vote_average; // Calificación
+
+    // Obtenemos peliculas para el container de las categorías relacionadas
+    createCategories(movie.genres, movieDetailCategoriesList);
 };

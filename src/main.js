@@ -118,10 +118,11 @@ async function getTrendingMovies() {
     createMovies(movies, genericSection);
 };
 
-async function getMovieById(movieId) {
+// Creamos la vista de detalle de película
+async function getMovieById(id) {
     // Obtain the API directly from aixos and get the movies(results)
     // Renombramos el "data" a "movie".
-    const {data: movie} = await api("/movie/" + movieId);
+    const {data: movie} = await api("/movie/" + id);
     
     // Obtenemos la imagen de la película.
     // 
@@ -142,4 +143,19 @@ async function getMovieById(movieId) {
 
     // Obtenemos peliculas para el container de las categorías relacionadas
     createCategories(movie.genres, movieDetailCategoriesList);
+
+    // Obtenemos las "Películas Similares"
+    getRelatedMoviesId(id);
+};
+
+// Obtenemos las "Películas Similares"
+async function getRelatedMoviesId(id){
+    const {data} = await api(`movie/${id}/similar`);
+    const relatedMovies = data.results;
+
+    // Añadimos imagenes al scroll horizontal
+    createMovies(relatedMovies, relatedMoviesContainer);
+    
+    // Retornamos scroll al incio
+    relatedMoviesContainer.scrollTo(0,0);
 };
